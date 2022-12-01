@@ -1,6 +1,6 @@
 # advent-of-code-2022
 
-An optimistic attempt to solve Advent of Code 2022 using an emulated BBC Micro Computer.
+An optimistic attempt to solve [Advent of Code 2022](https://adventofcode.com/2022) using an emulated BBC Micro Computer.
 
 ![BBC Micro](images/bbc-micro.jpg "A BBC Micro - black keyboard, a red row of function keys above, and creamy rectangular plastic casing")
 
