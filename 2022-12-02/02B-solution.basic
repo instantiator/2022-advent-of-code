@@ -1,0 +1,131 @@
+REPEAT
+ READ ROUND$
+ IF ROUND$<>"" SCORE=SCORE+FNscore(ROUND$)
+UNTIL ROUND$=""
+P.
+P.
+P. CHR$(130);"Score: ",SCORE
+END
+DEFFNscore(ROUND$)
+A$=LEFT$(ROUND$,1):B$=RIGHT$(ROUND$,1)
+IF B$="X" THEN S=FNlose(A$):P.".";
+IF B$="Y" THEN S=FNdraw(A$):P."=";
+IF B$="Z" THEN S=FNwin(A$):P."*";
+=S
+DEFFNlose(OPP$)
+IF OPP$="A" THEN =3
+IF OPP$="B" THEN =1
+IF OPP$="C" THEN =2
+P."Error":END
+DEFFNdraw(OPP$)
+IF OPP$="A" THEN =4
+IF OPP$="B" THEN =5
+IF OPP$="C" THEN =6
+P."Error":END
+DEFFNwin(OPP$)
+IF OPP$="A" THEN =8
+IF OPP$="B" THEN =9
+IF OPP$="C" THEN =7
+P."Error":END
+
+D. "CY","AZ","BY","AZ","AX","AZ","BY","AZ","BY","CZ","BY","CZ","AZ","CY","BY","BY","BY","CY","BY","BY","AX","BY","AY","BY","BY"
+D. "BX","AY","CZ","CX","AZ","BY","AX","CY","CX","CZ","CX","BY","BY","BX","AZ","AX","CY","AZ","CZ","BX","CX","BY","CX","CZ","CY"
+D. "CZ","AY","AZ","CZ","AZ","AZ","AZ","AZ","BY","AZ","BY","BY","BY","BX","AZ","BX","CZ","CZ","AZ","AZ","BY","CY","AX","CY","CY"
+D. "BZ","BY","CX","AX","AZ","CZ","CX","BY","AX","CX","BY","CX","BY","CX","BY","CY","AZ","CZ","BX","CY","BY","AZ","BX","CZ","CZ"
+D. "BY","CZ","CX","AX","AZ","AZ","AY","CZ","CY","AX","CZ","CY","AZ","CX","BX","AZ","BY","AZ","BX","CX","AZ","CY","CZ","BY","CY"
+D. "CX","AZ","CX","CX","BY","BZ","AX","BX","CY","AZ","BY","CZ","BY","CZ","BX","BY","BX","BY","BY","BY","CY","AZ","AY","AZ","CZ"
+D. "BY","CZ","BY","CY","AZ","BX","BY","CZ","AX","AY","CX","BX","AZ","CX","AY","AX","AZ","AZ","AZ","BY","BY","BZ","BY","CY","BY"
+D. "AZ","CX","AZ","AX","BY","AX","CX","CX","AX","BX","CX","CZ","BY","BY","CY","BX","CX","AZ","BY","BY","CZ","AZ","BY","BX","CZ"
+D. "AY","BY","AY","CY","CX","AX","BY","CX","BZ","BY","BY","AZ","CY","BY","BY","AY","BZ","BZ","AY","BY","CY","AZ","BY","CZ","AZ"
+D. "BY","AZ","CY","AX","BZ","CX","CY","BY","CY","AZ","AZ","BY","BY","CY","AY","AY","CY","AZ","CY","BX","CX","AX","AY","AZ","AY"
+D. "AZ","BY","BY","BY","AZ","CY","CZ","AY","CY","AZ","AZ","CZ","BY","AZ","CZ","BY","CY","CZ","CX","BY","AZ","BY","BY","AZ","CX"
+D. "BY","AZ","BY","CY","AY","AZ","CX","AZ","AY","CY","AZ","CY","CY","BX","AZ","BY","AZ","CY","BY","BY","BY","AZ","CZ","CY","BY"
+D. "CZ","CY","CY","CY","AX","BX","CX","BY","BY","BX","BY","BY","CZ","BY","BZ","CX","BY","CY","CY","BX","AZ","BY","BY","AZ","BY"
+D. "CZ","BY","BY","AZ","CZ","CZ","AZ","CY","BY","BY","CY","BZ","AY","CX","AZ","BX","CY","AZ","CZ","BY","BX","BY","BY","BY","CZ"
+D. "AZ","BY","BX","BY","BX","BX","CZ","AZ","BY","CZ","AZ","CY","CY","AZ","AZ","AY","BY","CX","AZ","BY","AZ","AZ","AZ","AY","AZ"
+D. "AZ","AY","AX","AZ","CZ","CY","CY","CX","AZ","AY","BY","AZ","AZ","BY","BX","BY","AZ","AX","BY","CY","CY","AZ","CY","CX","BY"
+D. "AX","AX","CY","AX","CZ","CX","CY","BY","AZ","CY","AZ","AZ","CZ","BY","AZ","AY","AX","CX","CX","BY","CX","BY","CZ","AY","BY"
+D. "CY","CX","BY","CY","AZ","BY","AX","CY","AY","AZ","AZ","BY","AZ","AZ","CX","BY","BY","AZ","BY","CY","CZ","AZ","CZ","CZ","BY"
+D. "AZ","BY","AZ","BZ","CZ","AY","BY","BY","BY","CY","AX","AX","BX","BY","CZ","CY","CY","CY","AX","BY","BY","CZ","CX","BY","AX"
+D. "AZ","CY","CY","AZ","AZ","CZ","AZ","CY","BY","AX","BY","CZ","AZ","AY","BY","BZ","CY","CY","CX","BY","CY","CY","CY","CZ","BY"
+D. "AY","AY","AZ","BY","CX","BX","BX","BX","AZ","BY","CZ","CZ","CX","BY","BY","BY","AX","AZ","AZ","BY","CY","BY","CY","BX","AZ"
+D. "BY","BY","BY","BY","BY","BY","CX","AY","BY","BY","CY","AZ","BY","CX","BX","CZ","CX","AX","CX","BY","BY","CX","BY","CY","AZ"
+D. "BY","AX","CY","AX","CY","CY","BY","AY","AZ","BY","CZ","CZ","BY","CZ","AZ","AY","AZ","CY","CZ","BY","CZ","AZ","CX","AY","CZ"
+D. "AZ","BY","CZ","CY","BY","AZ","BX","AZ","BX","CZ","BY","AX","CY","AZ","CY","BY","BY","BY","CY","BY","BY","CX","AZ","AZ","BY"
+D. "CY","CZ","CX","AZ","CY","BX","BY","AX","BY","AZ","AZ","BY","BX","CZ","CX","BZ","AY","BY","BZ","CY","AZ","BX","CY","BY","CZ"
+D. "BZ","AY","AX","CX","BY","CY","AX","AZ","BY","AY","BZ","CX","BY","CY","CX","AZ","AY","AZ","BY","CZ","BX","AX","BY","BZ","AZ"
+D. "CY","CX","AZ","CY","CZ","BX","AZ","BX","AZ","AZ","CY","BZ","CY","CY","BY","CX","BX","AX","AZ","CZ","BX","BX","BX","BZ","BY"
+D. "BZ","CY","BY","CY","CZ","AZ","AX","BY","BY","BY","BY","CX","BY","BY","AX","CX","BY","CZ","CY","AZ","AY","BY","CY","BY","CX"
+D. "CX","BY","BY","BY","CY","AZ","AY","CX","AZ","AZ","BY","CX","CY","BY","BY","CY","CX","BX","CY","BX","AZ","BY","CX","BX","CY"
+D. "CY","AZ","BY","AZ","CY","AZ","AZ","CZ","CX","CY","AZ","CZ","AZ","BY","AX","BY","BY","AZ","CX","BZ","BY","CX","AY","BY","AZ"
+D. "CZ","AZ","AZ","AZ","BY","BY","BX","BY","BY","BY","CZ","BY","AZ","CX","CZ","AZ","CZ","CY","BY","CY","BX","CY","BY","AZ","BY"
+D. "CX","BY","AZ","CY","BY","CY","CZ","AX","BX","CX","BX","AX","BY","AX","CZ","BY","CZ","BY","BY","CZ","BY","AY","CZ","BZ","AZ"
+D. "CX","AZ","AZ","BY","BY","CY","CZ","CX","AY","BY","BY","AX","AY","BX","CZ","CZ","BY","CY","BY","CX","BZ","AZ","AZ","BY","AY"
+D. "AY","AX","AZ","BY","AX","BZ","CZ","BX","CZ","BX","BY","AY","BX","AZ","AZ","CZ","AX","CZ","BY","AY","CZ","CX","BY","BY","AX"
+D. "CY","CX","CY","CX","AX","BY","BX","BY","CY","CY","CX","AY","AZ","CY","CY","BY","BX","BY","BX","AZ","AZ","CZ","BY","BY","BY"
+D. "BX","CZ","AY","AZ","BY","BY","BY","BX","AX","BY","CZ","AZ","AZ","CY","CY","BY","BY","AZ","BY","AX","AZ","CZ","AZ","BY","CX"
+D. "BY","AX","BY","BX","BY","BX","CX","AZ","CZ","CZ","BX","AZ","BY","AZ","BX","BY","AZ","CY","BY","AZ","AX","BY","AZ","BY","BY"
+D. "CY","AZ","BY","BY","CY","AZ","CZ","AZ","CZ","BY","AZ","BY","AZ","CY","BY","AX","AZ","BY","BY","CZ","CZ","CZ","BY","CY","AX"
+D. "CX","AX","CY","AY","BX","BY","CZ","BY","BY","BX","CZ","BY","CX","AZ","CX","BY","AX","CX","CY","AZ","AX","CZ","CZ","BY","CY"
+D. "AY","AZ","AY","CX","CX","BY","CY","BY","AZ","CX","BY","CY","AX","AZ","CY","BY","BY","AY","CX","BY","CY","BY","BX","AZ","CY"
+D. "CY","AX","CX","AZ","CX","BY","AX","CZ","BY","CX","BY","AZ","AY","BY","BX","BY","CY","CZ","BY","AZ","AX","BX","CX","CZ","BY"
+D. "BY","CX","CZ","AZ","CY","CZ","BY","AZ","BY","BY","CZ","CZ","BY","CY","BY","AZ","BX","BY","BY","CX","AZ","AZ","BY","CY","BY"
+D. "AZ","AY","AX","CZ","CY","CZ","CZ","CZ","AZ","BY","CZ","AZ","CY","AZ","BY","BY","BY","AZ","BY","BX","BY","BY","BY","BY","BY"
+D. "BY","AX","CZ","BX","BY","CX","AZ","BY","BX","CY","BY","CY","BY","AZ","BY","CY","AX","BY","CX","BX","BY","CZ","BX","CX","CY"
+D. "CX","CY","CX","AZ","CX","BY","AZ","BX","AZ","BX","BX","AZ","CZ","AZ","BX","BZ","CX","CY","AX","AZ","BX","CY","AZ","CZ","BY"
+D. "BY","CY","BZ","BY","BY","CY","CZ","BY","AZ","AX","BX","BX","CX","AZ","CY","BY","BY","AZ","BY","AZ","AZ","BY","BY","BY","BY"
+D. "CX","BY","BX","CZ","BX","CX","BX","BY","BY","BY","AZ","BY","AX","AY","CX","BX","BY","BY","CZ","AY","CZ","CY","AZ","CZ","CZ"
+D. "BX","BY","AZ","BY","CX","CY","CY","BX","BY","BZ","AY","AZ","CX","AX","BX","CX","BY","BY","BY","BX","CX","BY","AZ","AZ","AY"
+D. "BX","CY","CZ","AZ","AZ","BX","AZ","CY","BY","AX","BX","AZ","BY","BY","BY","BY","CZ","CZ","AY","BY","CZ","CZ","BY","BX","AZ"
+D. "CY","CX","AZ","AZ","CY","CX","CY","AY","BY","CX","BY","BX","CZ","CX","CY","BY","BY","AZ","BY","CZ","CY","BX","BY","AZ","AZ"
+D. "BX","BY","AX","AZ","BY","BY","BY","BY","BY","CY","BY","BY","CY","BY","BY","CZ","BY","AX","CY","BY","AZ","BY","CZ","CZ","CY"
+D. "AY","BY","AZ","AX","CY","CZ","CY","CZ","CZ","CY","BX","BY","BY","CZ","CX","AY","CY","BY","BY","AY","AY","CX","CY","AZ","AZ"
+D. "AX","BZ","BX","AX","AY","AZ","BY","CY","BX","BY","BY","CZ","CX","BY","BY","BY","BY","CY","BY","BX","CX","CY","BY","AZ","AY"
+D. "AZ","CZ","CY","AZ","AZ","BY","BY","CY","AX","BY","AZ","BY","AZ","BY","BX","CX","CY","AZ","AY","BY","CX","AZ","BY","AZ","CY"
+D. "BX","BY","BX","CZ","CX","BY","AZ","BY","BX","AX","CZ","CX","AZ","AY","AX","AZ","AZ","AZ","CY","AZ","BY","AZ","AZ","CZ","BX"
+D. "BY","BY","BY","BY","AZ","BY","CY","AZ","AY","BY","BY","CY","CY","AZ","CZ","AZ","BY","BY","AZ","AX","AZ","AZ","CY","CZ","AZ"
+D. "CX","AX","BY","CY","CX","CZ","BY","CY","AZ","AZ","CZ","AZ","AZ","AX","BY","CY","AZ","CX","CY","BY","CX","BX","BY","CY","AZ"
+D. "AZ","AX","BY","AZ","BY","BY","CZ","CZ","AX","AY","BY","CZ","BY","BY","CX","AZ","CZ","AX","BY","AY","BY","CZ","BY","CX","BY"
+D. "BX","BY","BY","CY","BX","BY","AZ","AZ","BZ","AZ","BY","BY","AY","AZ","CZ","CY","BX","BY","CY","BX","CX","BY","CX","AZ","BY"
+D. "BY","BY","CY","BY","BZ","AZ","BY","AZ","CY","BY","BY","BY","BY","CZ","BY","BY","BY","AZ","CZ","BY","BX","AZ","CX","CY","CZ"
+D. "BY","AZ","CY","AY","AX","CY","AX","AZ","AZ","BX","BY","BY","CY","BX","BY","AZ","BX","BY","CY","BY","CX","AZ","AZ","AZ","AZ"
+D. "CZ","AY","CZ","CZ","CZ","BX","BY","BX","AZ","AY","BY","AX","CX","CX","BY","BY","BY","AX","AX","BY","CZ","BY","AZ","CY","BY"
+D. "BY","AZ","CY","CZ","AY","AZ","BY","CX","CX","AZ","BY","CY","AZ","AZ","CZ","CX","BY","CZ","CZ","BY","AZ","AZ","BX","CX","BY"
+D. "CY","BY","CY","BY","BY","AZ","AY","BX","CY","BY","CX","CX","CY","AZ","BY","CY","BY","CY","BY","AY","BY","AZ","CX","CZ","CZ"
+D. "CY","BY","CY","BX","BX","AX","BY","AX","BY","AZ","CX","BY","AZ","BX","BZ","BY","BY","CY","BY","AZ","BY","CY","CZ","AZ","CZ"
+D. "BY","BY","BZ","AZ","BY","CZ","BX","AZ","AX","BX","BY","AX","BY","CY","AZ","AY","BY","AZ","BY","AY","BY","CZ","CZ","CY","CZ"
+D. "BY","AZ","BX","BY","CY","BY","CY","CY","AZ","AZ","CX","AY","CZ","BY","BY","BY","CY","BX","CY","BY","AZ","AY","BY","BY","BY"
+D. "CX","BY","CZ","AY","BX","AZ","AZ","CX","BY","BY","AZ","AY","AY","CZ","AZ","AY","BY","CX","AX","AY","BY","AX","BY","BX","CY"
+D. "CZ","CX","BY","CY","AZ","BX","AZ","BY","BY","BY","CY","BZ","CZ","CY","BY","CY","BX","AX","BY","BY","AX","CY","CY","CZ","BX"
+D. "AZ","CX","AZ","AZ","CZ","CY","BY","CY","CX","AZ","CZ","BY","AZ","AZ","CZ","AX","BY","BY","CY","AZ","BX","BX","BX","BY","BY"
+D. "BY","BY","AX","BY","BY","BX","CX","AZ","AZ","AZ","AZ","BY","AZ","AZ","BX","AZ","CY","BY","BY","BY","BX","CZ","AZ","BY","CX"
+D. "AX","CZ","BY","CY","CZ","AY","CZ","CX","CY","BZ","BY","BY","BY","AZ","CZ","AZ","AZ","CZ","BX","CZ","CY","BX","BY","CY","BY"
+D. "BX","AY","BY","AZ","AZ","BY","BY","BX","BX","BX","BY","AY","CX","CY","BY","CX","BX","AZ","BY","CX","BY","BY","BY","BY","AZ"
+D. "BY","CZ","BY","CZ","AX","AZ","CY","BY","CZ","BY","AY","CX","CX","CY","AZ","BY","CX","BY","BY","AX","CX","AZ","CX","AZ","BY"
+D. "CY","BY","BY","CY","AZ","AX","CX","BX","BY","BY","AY","BY","BY","CX","AZ","BY","AY","BY","BY","BY","CY","BY","CX","BX","BX"
+D. "CX","AZ","CX","CX","CZ","BY","BY","BY","BY","CZ","BX","BY","BY","AZ","AX","AY","AZ","CY","BY","BY","CX","BY","BY","BX","AY"
+D. "CY","BY","BY","BY","AZ","AZ","BX","CY","BY","AX","BY","BY","BX","BY","AY","CX","BY","CY","CZ","AZ","AZ","CZ","CY","AZ","BY"
+D. "BX","BY","BY","CZ","BY","AZ","CX","BY","AZ","BY","BY","BY","CX","AZ","AX","CZ","BY","AZ","CY","AY","BY","AY","BY","CY","CZ"
+D. "BY","AZ","AZ","BY","AX","CX","CZ","CX","BX","CZ","BZ","BY","BX","CZ","BY","CY","CY","AZ","BY","BY","BY","BY","CY","AZ","BY"
+D. "AZ","CZ","AX","AZ","BZ","AZ","CY","BY","CZ","BY","CZ","AZ","CZ","BY","BY","BY","AZ","BY","BX","BX","BX","AZ","CZ","CY","BX"
+D. "CZ","AX","BY","CY","BY","BX","BY","AZ","AX","AX","BY","CY","CY","BY","BY","AZ","CY","AX","AZ","CY","AZ","CZ","CY","AZ","CY"
+D. "CX","AZ","BX","BY","AX","CZ","CZ","BX","CX","BY","AZ","CZ","CY","CZ","CX","CZ","AX","CZ","BX","CY","CZ","BY","CX","AZ","AY"
+D. "BY","AZ","BY","BY","BX","CZ","BY","BY","BX","BY","CY","CZ","BX","BY","CZ","BY","BY","BY","BY","AZ","CZ","CY","BX","BX","BY"
+D. "BX","CY","CY","AZ","AZ","BX","BY","BY","CZ","CZ","BY","AZ","CX","CY","CX","BY","BY","CZ","CX","BY","CY","CZ","CY","CX","CY"
+D. "BX","BX","BY","BY","BY","CZ","BX","BY","CX","CY","CY","CX","AZ","BY","CY","CZ","BY","CY","BY","AY","AZ","CZ","CZ","CY","AX"
+D. "CX","CZ","CY","CZ","BX","CZ","BY","CX","CY","CY","AZ","BY","AZ","BY","AX","CZ","AZ","CZ","BY","BY","BY","AZ","AX","BY","BZ"
+D. "BY","BY","AZ","BY","BY","CZ","BZ","AZ","CX","BY","AY","BY","CY","CY","CX","BY","BZ","CY","BY","AY","CX","AZ","AZ","BX","CY"
+D. "BY","BZ","AZ","AZ","BY","AZ","AZ","AZ","CY","AZ","AY","AZ","CZ","CY","BY","AZ","BX","BY","AZ","AY","BX","BY","CY","CZ","CY"
+D. "BX","CY","BY","BY","AZ","AZ","BY","CX","AX","AZ","AX","AX","CY","BY","CZ","AZ","BZ","BY","BY","BY","CX","BY","CZ","BY","BY"
+D. "CZ","CZ","AZ","AZ","AZ","AZ","CY","AZ","AZ","BY","BY","AZ","AZ","CX","CY","AZ","BZ","BY","CX","CX","BY","CX","BY","CY","CX"
+D. "BY","CZ","AX","BY","BX","BY","CY","BY","AX","CX","BY","BY","BX","BY","AZ","AZ","AZ","AZ","BZ","BY","BY","CX","AZ","CY","BZ"
+D. "AX","BY","BX","BY","AX","CX","BY","BY","AZ","BY","CZ","AY","BX","CX","BY","BY","AZ","CX","CY","BY","CY","CZ","AY","AZ","BY"
+D. "BY","AZ","CY","BY","CY","CX","CX","CY","CZ","AZ","CX","BY","AZ","BY","CX","BY","BY","AZ","AZ","CX","BY","AZ","BY","AY","BX"
+D. "BY","BX","AY","BY","BX","BY","AZ","BY","CZ","BY","BY","BY","AY","BY","CZ","BX","BY","AX","AZ","BY","AZ","BX","CY","BY","BZ"
+D. "CY","BY","CY","CX","CX","CZ","BY","BY","BY","AZ","BX","AZ","CZ","BY","AY","BY","CY","AZ","BY","AY","BX","BY","CY","CY","AZ"
+D. "AZ","BY","CY","CZ","AZ","AX","BY","BY","BY","BY","AZ","CY","AZ","BY","BY","CZ","AZ","AX","CY","BY","BY","AZ","BX","CZ","CY"
+D. "CZ","CY","BY","AZ","AZ","BY","AZ","AZ","BZ","CX","CX","BY","CZ","AZ","BX","AX","AY","CY","CY","AZ","CY","BY","AZ","AZ","CY"
+D. "BY","AY","BX","CZ","BY","BY","AZ","BZ","CZ","BY","BY","BY","AY","CY","AZ","AX","BY","BY","BY","CZ","AX","BY","BY","CY","BX"
+D. "BY","AZ","BY","AZ","AY","CY","BY","BY","AZ","BX","AZ","AZ","AZ","BY","AY","CZ","BY","BX","BY","BY","BY","BY","BY","AX","CZ"
+D. "BY","BY","BY","CZ","BX","AY","BX","CZ","BY","CX","CX","AZ","BY","BY","AZ","CX","CX","AZ","BX","BY","CX","CZ","AX","BX","BY"
+D. ""
