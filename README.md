@@ -11,7 +11,7 @@ For now, you can copy/paste the code for each solution into the Owlet editor, an
 | Solution A | Solution B |
 |-|-|
 | ![Result 01A](2022-12-01/01A-screenshot.png "A BBC Micro showing the result: Elf 209, Cal: 74198")<br/>[01A-solution.basic](2022-12-01/01A-solution.basic) | ![Result 01B](2022-12-01/01B-screenshot.png "A BBC Micro showing the values for the 3 most burdened elves, and a total: 209914")<br/>[01B-solution.basic](2022-12-01/01B-solution.basic) |
-| 2022-12-02/02A-running.mov <br/>[02A-solution.basic](2022-12-02/02A-solution.basic) | ![result 02B](2022-12-02/02B-screenshot.png "A BBC Micro showing the outcomes from all the rounds as symbols, and a final score: 13071")<br/>[02B-solution.basic](2022-12-02/02B-solution.basic) |
+| <video src="2022-12-02/02A-running.mov"/><br/>[02A-solution.basic](2022-12-02/02A-solution.basic) | ![result 02B](2022-12-02/02B-screenshot.png "A BBC Micro showing the outcomes from all the rounds as symbols, and a final score: 13071")<br/>[02B-solution.basic](2022-12-02/02B-solution.basic) |
 
 ## The Beeb
 
