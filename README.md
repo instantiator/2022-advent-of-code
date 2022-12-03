@@ -12,6 +12,7 @@ For now, you can copy/paste the code for each solution into the Owlet editor, an
 |-|-|
 | ![Result 01A](2022-12-01/01A-screenshot.png "A BBC Micro showing the result: Elf 209, Cal: 74198")<br/>[01A-solution.basic](2022-12-01/01A-solution.basic) | ![Result 01B](2022-12-01/01B-screenshot.png "A BBC Micro showing the values for the 3 most burdened elves, and a total: 209914")<br/>[01B-solution.basic](2022-12-01/01B-solution.basic) |
 | ![running 02A](2022-12-02/02A-running.png "A BBC Micro part way through solving the first part of problem 2. It has printed symbols to represent the outcomes from each round...")<br/>[02A-solution.basic](2022-12-02/02A-solution.basic), [video](2022-12-02/02A-running.mov) | ![result 02B](2022-12-02/02B-screenshot.png "A BBC Micro showing the outcomes from all the rounds as symbols, and a final score: 13071")<br/>[02B-solution.basic](2022-12-02/02B-solution.basic) |
+| ![Result 03A](2022-12-03/03A-screenshot.png "A BBC Micro showing a character for each rucksack, and below it in green a total: 7967")<br/>[03A-solution.basic](2022-12-03/03A-solution.basic) | ![Result 03B](2022-12-03/03B-screenshot.png "A BBC Micro showing a character for each group of 3 rucksacks, and below it in yellow a total: 2716")<br/>[03B-solution.basic](2022-12-03/03B-solution.basic) |
 
 ## The Beeb
 
