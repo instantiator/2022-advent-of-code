@@ -1,0 +1,108 @@
+buffer$="":tag$="****":count=0:found=0
+REPEAT
+  count=count+1
+  c$=FNnextChar:P. c$;
+  tag$=tag$+c$
+  tag$=RIGHT$(tag$,LEN(tag$)-1)
+  IF FNallDiff(tag$) AND count>3 THEN found=count
+UNTIL c$="*" OR found>0
+P.''CHR$(132);"Position:",found
+END
+
+DEFFNallDiff(w$)
+A%=MID$(w$,1,1)<>MID$(w$,2,1)
+B%=MID$(w$,1,1)<>MID$(w$,3,1)
+C%=MID$(w$,1,1)<>MID$(w$,4,1)
+D%=MID$(w$,2,1)<>MID$(w$,3,1)
+E%=MID$(w$,2,1)<>MID$(w$,4,1)
+F%=MID$(w$,3,1)<>MID$(w$,4,1)
+=A% AND B% AND C% AND D% AND E% AND F%
+
+DEFFNnextChar
+  IF LEN(buffer$)=0 THEN READ buffer$
+  char$=LEFT$(buffer$,1)
+  buffer$=RIGHT$(buffer$,LEN(buffer$)-1)
+  =char$
+
+D. "llqnqffqsqttfffbcfcbcbdcczccfssvwswrwddzlddpdhdwwl"
+D. "vlffjllnjjwjqwjjttwbwcwfccdmmnddgvvpwvvgsshnshsggl"
+D. "ljfjzjpjfpfjpplddjcchdhvhlhvllvflfbllsdllgppwjjprj"
+D. "pjrrdwrdrggjvjppgbgttdppwhhcshsvvgpvggsllstsggdjdm"
+D. "jjrvjjszjsjbbsffjwjnwwzjjjvqvfftbffbpffndfdzfdfvdf"
+D. "dggmpmbbwgbgnnbtnnnhggdmdffrqrlrhrzzrmzzmbzzcdcwwz"
+D. "ffsrrnfnvfnnvppwjjndjnndtdppgcppsmppljlpjjmlldlslt"
+D. "lglwgwcwnwvwddzrrllwjjnvjvwvppjssncnfcnfcfcczfccpj"
+D. "phjphjjjsgszzhthghjhrjrbrtrjrhrsrfftfzftfmmwmpmggh"
+D. "bggjrrsdswddtjjvnnrwrzrpzzlglwggrnrgrfftnffwwgllrq"
+D. "qzbqbbtltbbgdgpgphggspggplggmcmscsffzcfzzbggdrgrqg"
+D. "rrnlrnrbnnzsnnzcctvvnvwvnwnhhwpwtptllpflfcfttwtjjh"
+D. "wjhhbwhbbtppwhwvhvghvhphpwwcgwwhbbfvbffzpzlllrzlrr"
+D. "bnnrngrnrpnnsszbbqffpsffhfshfhzzqhhcgcgfggzmmdllth"
+D. "hrhnrrwggdqdsstccqllflmflfddjwjzjffvjjfgjgdgbdgdng"
+D. "npgpnpffsnsjnnbbjdbjbtbmmbrrlbbqmqpqrprjjrbbvnbbzv"
+D. "vcwwlfwfggmhhdhsdhsdhshhqfhfrhhqlqttffpmmjzjqjggqz"
+D. "zdfzflfsllshhvjvfvbfvbbjljhhzrzqqszqzsqqswswbsbzsz"
+D. "gzdgzzhjzhhvffhthvtthltthghzhvvjttczttlssvvgjjmsjs"
+D. "tjjrfjjhbjbnjbjddqrddnbdnbnwbnbqbmqqgtgqtttcmmqbqr"
+D. "rgrrsrszssvpsvvjqjttjpjwwmwfwttczttgccwhcwwrzwzbww"
+D. "qbqmqnmqqnfnmmmzdmzmpmssdpsslbbmgmbmlmnlldlccvzzlr"
+D. "zzqbqfqlflwlvlhhtrtcttgnnqhnqqtjjphjhwjhwhpwwvdvfd"
+D. "dmndncnppcffhllfvfdfllhgslvtsqhtlfdflcjfmqbnctnfnw"
+D. "qrlqbzrcbvldrffcptsgslqcszqcfdvtpggvdqblwcgmdjqrpj"
+D. "dhtrmvrfrzznspqlfhnjsppbpjdggcwjwprpnlnntgfgmflctq"
+D. "phdmzfvpzzmbzmvrqdgchzmdvjdzmfsslpqvhpgznmpspjpdml"
+D. "fwwjbbwqbfthghclldpmnsbcwlzswrsnfzbdzpcnrrpspdpfqh"
+D. "vmtfjlppqtphvzzqrwhzccnrgrtgfbfgtwvlwsmcvzmqmhsvzt"
+D. "mmvpjzfwzgfwntbrsfthdgrcmgtdsvzcllmcshrlqldrvrnmdg"
+D. "bwttmhczvscrdvfgdvrhfvlghhsfbmrptbwmpnvtsrjlpjlbmm"
+D. "jzwwzbdtjlqqdczqgpzfjslccrcrblhplndblghchczbjjfzls"
+D. "vvrqhvgdsncgpjhjlprhfhswwbmrnszqzhhlrbqpphvgtfsgmd"
+D. "pjwgcmqnvfdhrqmbspjpdrtdbqnbmbpgqwgmltqwrjprvsfjsm"
+D. "pldcqqbvmfhgzltzfvhlnfdqrphzzjrbdvnnjspvnlnnsdzvgq"
+D. "sqztndjpmnbqtwnpzmmfhsswwnnwwlbnpgbrhzchbnsrwwpprh"
+D. "ntngsjzvssttqwfvjrdddtfpgtqqzcwljzmdjtgzdqjjvbqgdt"
+D. "tdgvqvlfdsgcjhsmdmwrwdcqdflpfjbfzsvjrzrhhcnvcjblwc"
+D. "dvtbgfhfgcwrcjsrzcdrfwtvdqrghdtrjgdmhrfcsnwwwdpvjt"
+D. "pzdqfgrlmrqscjbfgdbgvflhvdjmnmslvsbcbgwplgqljmlzpg"
+D. "rfjwmvqfwmwrhnmdjhdwgjrngvccrbzmhcqthvvtdtmfqvfczh"
+D. "qbfgzgrmdtprznfzjtrcwqgztchtdmzmnwbfbnbttbvzsflcps"
+D. "jshgphfdlvhdrcpsqnhjjggbnsqrfpwsdznzcwjbcswwndzbpd"
+D. "nfcbdrfgrmqzvtjttltbntznmqfsmqlgqvlqnrvgrnggslqhbp"
+D. "lmgpzwlfzbvwdvrchsnhrnvgmzjdprvvspltcdzmdnlgtmrwnw"
+D. "pdndpdqjltcnmsggrvbprslqhfgmzqtppdpsjcmmbvfgmbpdnw"
+D. "dcgnssfgjhzhrjljdwhrzznscndgbscdmbbtbrnzbqzvcjgjgl"
+D. "jbjlrrvdhjdllsnjzhwlmjslghrqplwjwssbzzpdzdfhhsqctl"
+D. "cddnfnnvbcwpdvzdcsgcqpctsjtdtnzpggpzsrrhfjtthqcqht"
+D. "vwzltbdvdnbgwlppblwzjsqqbcpcrthhrhdnzhdnflqlvbzmcj"
+D. "fcrbmgdgqptfqfbmlfbblqdfmnwgvbdhmcmtmvtggqstjpwhvz"
+D. "jhbgpblmdrnggvrvphbglqgfcphmrgfmrwcdchtwfllqwsnbqt"
+D. "twdcvrwgzjfztmcffppqtmnwpgcrgwtjbdtjlmnpmvlzndljgl"
+D. "zblwdrggqvbbfvqcbcbpqttrmqlcqnqvrfqsnlpmwlcgfwfcqp"
+D. "gmszfccbqtcqfwlwqrjjhrdbjqvdmfzjgncjqgqbthpgjgbfdv"
+D. "ltbhpnbjqqwrsczrthfhmlzjjjgsjtsvgmwfsjngzfqdqzfhvw"
+D. "jrswvnqvsvvsjdbwlwdcsszdngmmhnnqsgvsrvpnndghrwgzzt"
+D. "qczvhcrzdpqtrmrnfsfrlpdnbbtshfhplzqvdvzdvwhwsbpnbz"
+D. "lvcbgptdszjlcgfdzchjcsvhzdljvgpwstzwnssvhztcptnhsl"
+D. "ggnrschvfnmhcnjvldthtfpqzdvltfgnmtgvlrljhwqdzqfmfb"
+D. "lstvfnpfcdsqslrqbztrbfzmsfjtjwhlzfnhrvpfqfqvtdllrv"
+D. "chmqphgljwcspgpwsdwqfdhsqhsflpbcbjjmjrfjrqrqfqcqzq"
+D. "sqcnqhfgsclfnfzblfdhphrvqdpvcqmllrcdnrlwqbrgqsbfqq"
+D. "llcvmglntjwcsjljgntmmldscndfdjcqpwbqpbmfjsgwfwcqbq"
+D. "bbhhgprlbzmvdfjcsmsqvhfhmgrhnwpslztmwbhdgrfzfcmwjs"
+D. "wpbpzwstfbfmgwtprmptzjwtrqthrqwgslnmtlfgnvgpwvsfwt"
+D. "htrgwfbnnnwmdcfrpqqztplscvfnfpfwwdnfnzjccnhswwlcrr"
+D. "dqfhvsrnvcdrwmjswzggscplggbwgndsbntqvtrjbmbzrnbbmd"
+D. "jvwrmmtrmfjjhnvrcjcbqlhlthbvtjjczddblbbttmmzgdqmtd"
+D. "qswjdwbjhsrjbvdtqzqdbhhgbttgmgwfgfpczpqpfsddgslltw"
+D. "svngwbwfbfcdzlqghwdbfzzldjpwpmpjmslwnwbrjjvwcsjgdz"
+D. "jwrrwnvgvrqlgjhwvrgnczspfplhfbtdpbpfqmhbvmcqdgrrjf"
+D. "slzgsqfpwrrrmjdtgbslddwvddrbmrdsdhhnlwsncrmnglrrpv"
+D. "tbrfvjbdmcpgphcdfwnfcglvmlbslttpmjnspqhnmbcqgmncfj"
+D. "jpdfjqhggnswbgppjhllscrvtmtmmbwbpgddtzblscntrmccdp"
+D. "zdnllqpvfdpfpwwvnnbjlzphvqwffwsjmbtllctrjmllwscmld"
+D. "cdrpfrzrqlpwbjwfgmnshzqzgdjqhcwtsqlsjffvzcpnrzmvtl"
+D. "zlgwvrrjtdbcnddbhjgqqzrvhplrbsrwgscjnfmhbcnpdcjqrl"
+D. "tgdzzzzbqtsspbcdssbjrzfqdgvhmgdzsjdsqcfwbgrnhrlzgp"
+D. "jmhctqdccmvqzddmcptsjgtfshprqmslvtmtrprfsngrnnpnrc"
+D. "crvnrvcwzrbbnbghlwvcncgzglnqthchhsnzlfrcggdptvwlrb"
+D. "nfwgjpflgrcfzhhgffwcbhwlsdmvmsvvzvdcrlvlnstgz*"
