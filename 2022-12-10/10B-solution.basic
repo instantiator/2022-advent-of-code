@@ -1,0 +1,165 @@
+MODE 4
+C%=1:X%=1
+px=0:py=1
+DIM results(6):R%=0
+REPEAT
+  READ cmd$
+  IF cmd$="addx" THEN READ V%:PROCadvance:PROCadvance:X%=X%+V%
+  IF cmd$="noop" THEN PROCadvance
+UNTIL cmd$="*"
+
+END
+
+DEFPROCadvance
+REM do something with the cycle before advancing
+IF px>X%-2 AND px<X%+2 THEN PLOT 69,480+px*8,536-py*8
+px=px+1:IF px>39 THEN px=0:py=py+1
+REM advance cycle
+C%=C%+1
+ENDPROC
+
+D. "addx",1
+D. "addx",4
+D. "addx",1
+D. "noop"
+D. "addx",4
+D. "addx",3
+D. "addx",-2
+D. "addx",5
+D. "addx",-1
+D. "noop"
+D. "addx",3
+D. "noop"
+D. "addx",7
+D. "addx",-1
+D. "addx",1
+D. "noop"
+D. "addx",6
+D. "addx",-1
+D. "addx",5
+D. "noop"
+D. "noop"
+D. "noop"
+D. "addx",-37
+D. "addx",7
+D. "noop"
+D. "noop"
+D. "noop"
+D. "addx",5
+D. "noop"
+D. "noop"
+D. "noop"
+D. "addx",9
+D. "addx",-8
+D. "addx",2
+D. "addx",5
+D. "addx",2
+D. "addx",5
+D. "noop"
+D. "noop"
+D. "addx",-2
+D. "noop"
+D. "addx",3
+D. "addx",2
+D. "noop"
+D. "addx",3
+D. "addx",2
+D. "noop"
+D. "addx",3
+D. "addx",-36
+D. "noop"
+D. "addx",26
+D. "addx",-21
+D. "noop"
+D. "noop"
+D. "noop"
+D. "addx",3
+D. "addx",5
+D. "addx",2
+D. "addx",-4
+D. "noop"
+D. "addx",9
+D. "addx",5
+D. "noop"
+D. "noop"
+D. "noop"
+D. "addx",-6
+D. "addx",7
+D. "addx",2
+D. "noop"
+D. "addx",3
+D. "addx",2
+D. "addx",5
+D. "addx",-39
+D. "addx",34
+D. "addx",5
+D. "addx",-35
+D. "noop"
+D. "addx",26
+D. "addx",-21
+D. "addx",5
+D. "addx",2
+D. "addx",2
+D. "noop"
+D. "addx",3
+D. "addx",12
+D. "addx",-7
+D. "noop"
+D. "noop"
+D. "noop"
+D. "noop"
+D. "noop"
+D. "addx",5
+D. "addx",2
+D. "addx",3
+D. "noop"
+D. "noop"
+D. "noop"
+D. "noop"
+D. "addx",-37
+D. "addx",21
+D. "addx",-14
+D. "addx",16
+D. "addx",-11
+D. "noop"
+D. "addx",-2
+D. "addx",3
+D. "addx",2
+D. "addx",5
+D. "addx",2
+D. "addx",-15
+D. "addx",6
+D. "addx",12
+D. "addx",-2
+D. "addx",9
+D. "addx",-6
+D. "addx",7
+D. "addx",2
+D. "noop"
+D. "noop"
+D. "noop"
+D. "addx",-33
+D. "addx",1
+D. "noop"
+D. "addx",2
+D. "addx",13
+D. "addx",15
+D. "addx",-21
+D. "addx",21
+D. "addx",-15
+D. "noop"
+D. "noop"
+D. "addx",4
+D. "addx",1
+D. "noop"
+D. "addx",4
+D. "addx",8
+D. "addx",6
+D. "addx",-11
+D. "addx",5
+D. "addx",2
+D. "addx",-35
+D. "addx",-1
+D. "noop"
+D. "noop"
+D. "*"
