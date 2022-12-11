@@ -21,6 +21,8 @@ For now, you can copy/paste the code for each solution into the Owlet editor, an
 | ![Result 09A](2022-12-09/09A-screenshot.png "BBC Micro graphics - the motion of the rope's tail is rendered in yellow. At the top of the screen, the outcome is printed: 5960")<br/>[09A-solution.basic](2022-12-09/09A-solution.basic) | ![Result 09B](2022-12-09/09B-screenshot.png "BBC Micro graphics - BBC Micro graphics - the motion of the rope's tail is rendered in yellow. Its form is much smoother than the first solution, and mostly diagonal. At the top of the screen, the outcome is printed: 2327")<br/>[09B-solution.basic](2022-12-09/09B-solution.basic)<br/>(runtime: ~90m) |
 | ![Result 10A](2022-12-10/10A-screenshot.png "BBC Micro screen - coloured text on black - showing half a dozen numbers in cyan, and their sum in green: 15020")<br/>[10A-solution.basic](2022-12-10/10A-solution.basic) | ![Result 10B](2022-12-10/10B-screenshot.png "BBC Micro graphics - a small 40x6 dot display in the centre of the screen shows the letters: EFUGLPAP")<br/>[10B-solution.basic](2022-12-10/10B-solution.basic) |
 
+| ![Result 11A](2022-12-11/11A-screenshot.png "BBC Micro screen - a few rows of comma separated numbers at the top, and then below there are 8 items listed stating how many inspections each monkey made.")<br/>[11A-solution.basic](2022-12-11/11A-solution.basic) | Incomplete - numbers too big for BASIC to handle. |
+
 ## The Beeb
 
 ![BBC Micro](images/bbc-micro.jpg "A BBC Micro - black keyboard, a red row of function keys above, and creamy rectangular plastic casing")

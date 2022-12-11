@@ -1,0 +1,59 @@
+MODE 0
+DIM holding$(8), worry$(8), testDiv(8), onTrue(8), onFalse(8), inspections(8)
+FOR I=0 TO 7:READ holding$(I), worry$(I), testDiv(I), onTrue(I), onFalse(I):NEXT
+
+FOR r=1 TO 10000
+PROCround(r)
+NEXT
+
+FOR m=0 TO 7
+P. TAB(0,12+m)"Monkey ";m;" inspected ";inspections(m);" times."
+NEXT
+
+END
+DEFPROCround(r)
+P.TAB(0,0)"Round: ";r
+FOR I=0 TO 7
+REPEAT
+IF holding$(I)<>"" THEN PROCabuse(I)
+UNTIL holding$(I)=""
+NEXT
+ENDPROC
+
+DEFPROCabuse(I)
+inspections(I)=inspections(I)+1
+
+REM get and remove first item from monkey
+comma=INSTR(holding$(I),","):REM no comma, only 1 item
+IF comma>0 THEN item$=LEFT$(holding$(I),comma-1) ELSE item$=holding$(I)
+IF comma>0 THEN holding$(I)=RIGHT$(holding$(I),LEN(holding$(I))-LEN(item$)-1) ELSE holding$(I)=""
+PROCplot(I)
+
+REM get old value, apply worry rule, divide by 3
+old=VAL(item$)
+new=EVAL(worry$(I))
+REM new=INT(new/3)
+
+REM test division
+IF new/testDiv(I)=INT(new/testDiv(I)) THEN target=onTrue(I) ELSE target=onFalse(I)
+
+REM throw item to next monkey
+IF holding$(target)<>"" THEN holding$(target)=holding$(target)+","+STR$(new)
+IF holding$(target)="" THEN holding$(target)=holding$(target)+STR$(new)
+PROCplot(target)
+ENDPROC
+
+DEFPROCplot(monkey)
+P. TAB(0,monkey+2);monkey;": ";holding$(monkey);STRING$(77-LEN(holding$(monkey)), " ")
+ENDPROC
+
+REM  monkeys are 0-indexed
+REM  starting items,            new =         / by, T, F
+DATA "63,84,80,83,84,53,88,72", "old * 11",   13,   4, 7
+DATA "67,56,92,88,84",          "old + 4",    11,   5, 3
+DATA "52",                      "old * old",  2,    3, 1
+DATA "59,53,60,92,69,72",       "old + 2",    5,    5, 6
+DATA "61,52,55,61",             "old + 3",    7,    7, 2
+DATA "79,53",                   "old + 1",    3,    0, 6
+DATA "59,86,67,95,92,77,91",    "old + 5",    19,   4, 0
+DATA "58,83,89",                "old * 19",   17,   2, 1
