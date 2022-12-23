@@ -1,0 +1,377 @@
+PROCinit
+PROCtest
+END
+
+REM test suite
+DEFPROCtest
+
+P.'CHR$(133);"Utility tests..."
+
+P.
+PROCset(0,12345)
+PROCassert(5,FNdig(0,1),"Reg(0), digit 1  = 5")
+PROCassert(1,FNdig(0,5),"Reg(0), digit 5  = 1")
+PROCassert(0,FNdig(0,10),"Reg(0), digit 10 = 0")
+
+P.'CHR$(133);"Comparison function tests..."
+
+P.
+PROCset(0,-5)
+PROCset(1,-10)
+PROCassert(TRUE, FNgt(0,1), "gt(0,1) should be true")
+PROCassert(FALSE, FNgt(1,0), "gt(1,0) should be false")
+
+P.
+PROCset(1,-2)
+PROCassert(FALSE, FNgt(0,1), "gt(0,1) should be false")
+PROCassert(TRUE, FNgt(1,0), "gt(1,0) should be true")
+
+P.
+PROCset(0,12345)
+PROCset(1,12344)
+PROCassert(TRUE, FNgt(0,1), "gt(0,1) should be true")
+PROCassert(FALSE, FNgt(1,0), "gt(1,0) should be false")
+PROCassert(FALSE, FNeq(1,0), "eq(1,0) should be false")
+
+P.
+PROCset(1,12345)
+PROCassert(TRUE, FNeq(1,0), "eq(1,0) should be true")
+
+P.'CHR$(133);"Arithmetic tests..."
+
+P.
+PROCset(0,11111)
+PROCset(1,22222)
+PROCadd
+PROCassert(33333, FNget(0), "11111 + 22222 = 33333")
+
+P.
+PROCset(0,99999)
+PROCset(1,1)
+PROCadd
+PROCassert(100000, FNget(0), "99999 + 1 = 100000")
+
+P.
+P. "Reg(0,3) = 7"
+PROCput(0,3,7)
+PROCassert(100700, FNget(0), "100's digit should = 7")
+
+P.
+PROCset(0,500)
+PROCset(1,400)
+PROCsub
+PROCassert(100,FNget(0), "500 - 400 = 100")
+
+P.
+PROCset(0,400)
+PROCset(1,1)
+PROCsub
+PROCassert(399,FNget(0), "400 -1 = 399")
+
+P.
+PROCset(0,500)
+PROCset(1,-5)
+PROCadd
+PROCassert(495,FNget(0), "500 + -5 = 495")
+
+P.
+PROCset(0,20)
+PROCset(1,-6)
+PROCadd
+PROCassert(14,FNget(0), "20 + -6 = 14")
+
+P.
+PROCset(0,-20)
+PROCset(1,30)
+PROCadd
+PROCassert(10,FNget(0), "-20 + 30 = 10")
+
+P.
+PROCset(0,5)
+PROCset(1,-10)
+PROCsub
+PROCassert(15,FNget(0), "5 - -10 = 15")
+
+P.
+PROCset(0,5)
+PROCset(1,10)
+PROCsub
+PROCassert(-5,FNget(0), "5 - 10= -5")
+
+P.
+PROCset(0,-5)
+PROCset(1,10)
+PROCsub
+PROCassert(-15,FNget(0), "-5 - 10 = -15")
+
+P.
+PROCset(0,2)
+PROCset(1,2)
+PROCmul
+PROCassert(4,FNget(0), "2 * 2 = 4")
+
+P.
+PROCset(0,2)
+PROCset(1,50)
+PROCmul
+PROCassert(100,FNget(0), "2 * 50 = 100")
+
+P.
+PROCset(0,33)
+PROCset(1,100)
+PROCmul
+PROCassert(3300,FNget(0), "33 * 100 = 3300")
+
+P.
+PROCset(0,33)
+PROCset(1,55)
+PROCmul
+PROCassert(1815,FNget(0), "33 * 55 = 1815")
+
+P.
+PROCset(0,33)
+PROCset(1,555)
+PROCmul
+PROCassert(18315,FNget(0), "33 * 555 = 18315")
+
+P.
+PROCset(0,479)
+PROCset(1,987)
+PROCmul
+PROCassert(472773,FNget(0), "479 * 987 = 472773")
+
+P.
+PROCset(0,2)
+PROCset(1,-50)
+PROCmul
+PROCassert(-100,FNget(0), "2 * -50 = -100")
+
+P.
+PROCset(0,-3)
+PROCset(1,-3)
+PROCmul
+PROCassert(9,FNget(0), "-3 * -3 = 9")
+
+P.'CHR$(133);"MOD tests..."
+
+P.
+PROCset(0,15)
+PROCset(1,10)
+PROCmod
+PROCassert(5,FNget(0), "15 MOD 10 = 5")
+
+P.
+PROCset(0,23)
+PROCset(1,7)
+PROCmod
+PROCassert(2,FNget(0), "23 MOD 7 = 2")
+
+P.
+PROCset(0,103)
+PROCset(1,9)
+PROCmod
+PROCassert(4,FNget(0), "103 MOD 9 = 4")
+
+P.'CHR$(133);"Big number tests..."
+
+P.
+PROCsetStr(0,"2147483647")
+PROCsetStr(1,"2147483647")
+PROCadd
+PROCassertStr("4294967294",FNgetStr(0), "2147483647 + 2147483647 = 4294967294")
+
+P.
+PROCsetStr(0,"4294967294")
+PROCsetStr(1,"500")
+PROCsub
+PROCassertStr("4294966794",FNgetStr(0), "4294967294 - 500 = 4294966794")
+
+P.
+PROCsetStr(0,"2147483647")
+PROCsetStr(1,"2")
+PROCmul
+PROCassertStr("4294967294",FNgetStr(0), "2147483647 * 2 = 4294967294")
+
+P.
+PROCsetStr(0,"4294967294")
+PROCsetStr(1,"429496722")
+PROCmod
+PROCassertStr("74",FNgetStr(0), "4294967294 MOD 429496722 = 74")
+ENDPROC
+
+DEFPROCassert(expected,value,msg$)
+IF value<>expected THEN P. CHR$(129);msg$:P. CHR$(131);"Expected: ";expected:P. CHR$(131);"Found:    ";value:END
+P. CHR$(130);"Assert:  ";msg$
+P. CHR$(130);"Result = ";value
+P. CHR$(130);"PASS"
+ENDPROC
+
+DEFPROCassertStr(expected$,value$,msg$)
+IF value$<>expected$ THEN P. CHR$(129);msg$:P. CHR$(131);"Expected: ";expected$:P. CHR$(131);"Found:    ";value$:END
+P. CHR$(130);"Assert:  ";msg$
+P. CHR$(130);"Result = ";value$
+P. CHR$(130);"PASS"
+ENDPROC
+
+REM registers: 0=acc, 1=param, 2=scratch, 3=scratch2
+DEFPROCinit
+DIM reg$(3):FOR R%=0 TO 3:reg$(R%)=STRING$(256,"0"):NEXT
+DIM pos%(3):FOR R%=0 TO 3:pos%(R%)=TRUE:NEXT
+ENDPROC
+
+DEFPROCset(R%,N%)
+pos%(R%)=N%>=0:N%=ABS(N%)
+reg$(2)=STR$(N%)
+reg$(R%)=""
+FOR I%=LEN(reg$(2)) TO 1 STEP -1
+reg$(R%)=reg$(R%)+MID$(reg$(2),I%,1)
+NEXT
+P. CHR$(134);"Reg(";R%;") = ";FNget(R%)
+ENDPROC
+
+DEFPROCsetStr(R%,value$)
+IF LEFT$(value$,1)="-" THEN pos%(R%)=FALSE:value$=RIGHT$(value$,LEN(value$)-1) ELSE pos%(R%)=TRUE
+reg$(R%)=""
+FOR SI%=LEN(value$) TO 1 STEP -1
+  reg$(R%)=reg$(R%)+MID$(value$,SI%,1)
+NEXT
+P. CHR$(134);"Reg(";R%;") = ";value$
+ENDPROC
+
+REM register,digit,value
+DEFPROCput(R%,U%,V%)
+reg$(R%)=LEFT$(reg$(R%),U%-1) + STR$(V%) + RIGHT$(reg$(R%), LEN(reg$(R%))-U%)
+ENDPROC
+
+DEFFNget(R%)
+N% = 0
+FOR I%=1 TO LEN(reg$(R%))
+N% = N% + (FNdig(R%,I%) * (10^(I%-1)))
+NEXT
+IF pos%(R%) THEN =N% ELSE =-N%
+
+DEFFNgetStr(R%)
+IF NOT pos%(R%) THEN reg$(2)="-" ELSE reg$(2)=""
+leading%=TRUE
+FOR I%=LEN(reg$(R%)) TO 1 STEP -1
+  C$=MID$(reg$(R%),I%,1)
+  IF C$<>"0" THEN leading%=FALSE
+  IF NOT leading% THEN reg$(2)=reg$(2)+C$
+NEXT
+=reg$(2)
+
+DEFPROCprint(R%)
+IF NOT pos%(R%) THEN P."-";
+FOR PR%=1 TO LEN(reg$(R%))
+  P. MID$(reg$(R%),PR%,1);
+NEXT
+P.
+ENDPROC
+
+REM retrieves digitl D% from register R%
+REM remember: smallest digits come first
+DEFFNdig(R%,D%) =VAL(MID$(reg$(R%),D%,1))
+
+REM true if the contents of both registers are equal
+DEFFNeq(A%,B%)
+result=TRUE
+IF LEN(reg$(A%)) <> LEN(reg$(B%)) =FALSE
+FOR I%=LEN(reg$(A%)) TO 1 STEP -1
+IF FNdig(A%,I%) <> FNdig(B%,I%) result=FALSE:I%=0
+NEXT
+=result
+
+REM true if the contents of register A% > contents of register B%
+DEFFNgt(A%,B%)
+IF pos%(A%) AND NOT pos%(B%) THEN =TRUE
+IF pos%(B%) AND NOT pos%(A%) THEN =FALSE
+larger=FALSE
+L%=LEN(reg$(A%)):IF LEN(reg$(B%))>L% THEN L%=LEN(reg$(B%))
+FOR GTI%=L% TO 1 STEP -1
+CA%=FNdig(A%,GTI%):CB%=FNdig(B%,GTI%)
+IF CA% > CB% THEN larger=pos%(A%):GTI%=0
+IF CA% < CB% THEN larger=NOT pos%(A%):GTI%=0
+NEXT
+=larger
+
+REM adds registers 0 and 1, result goes into register 0
+DEFPROCadd
+P. CHR$(132);"ADD: Reg(0) = Reg(0) + Reg(1)"
+IF pos%(0) AND NOT pos%(1) THEN pos%(1)=TRUE:PROCsub:ENDPROC
+IF NOT pos%(0) AND pos%(1) THEN PROCswap:pos%(1)=TRUE:PROCsub:ENDPROC
+L%=LEN(reg$(0)):IF LEN(reg$(1))>L% THEN L%=LEN(reg$(1))
+C%=0:reg$(2)=""
+FOR I%=1 TO L%
+S%=FNdig(0,I%) + FNdig(1,I%) + C%:REM sum
+P%=S% MOD 10:REM place
+C%=S% / 10:REM carry
+reg$(2)=reg$(2)+STR$(P%)
+NEXT
+IF C%>0 reg$(2)=reg$(2)+STR$(C%)
+reg$(0)=reg$(2)
+IF NOT pos%(0) AND NOT pos%(2) THEN pos%(0)=FALSE
+ENDPROC
+
+REM swap registers 0 and 1
+DEFPROCswap
+P. CHR$(132);"SWAP: Reg(0) <=> Reg(1)"
+reg$(2)=reg$(0):pos%(2)=pos%(0)
+reg$(0)=reg$(1):pos%(0)=pos%(1)
+reg$(1)=reg$(2):pos%(1)=pos%(2)
+ENDPROC
+
+REM subtracts register 1 FROM register 0, result goes into register 0
+DEFPROCsub
+P. CHR$(132);"SUB: Reg(0) = Reg(0) - Reg(1)"
+IF NOT pos%(1) THEN pos%(1)=TRUE:PROCadd:ENDPROC
+IF FNgt(1,0) THEN PROCswap:PROCsub:pos%(0)=FALSE:ENDPROC
+L%=LEN(reg$(0)):IF LEN(reg$(1))>L% THEN L%=LEN(reg$(1))
+reg$(2)=""
+FOR I%=1 TO L%
+S%=FNdig(0,I%) - FNdig(1,I%)
+IF S%<0 THEN PROCborrow(0,I%+1):S%=S%+10
+reg$(2)=reg$(2)+STR$(S%)
+NEXT
+reg$(0)=reg$(2)
+ENDPROC
+
+REM borrows from the next (recursive) digit in register 0
+DEFPROCborrow(R%,borrow%)
+digit%=FNdig(R%,borrow%)
+IF digit%>0 PROCput(R%,borrow%,digit%-1)
+IF digit%=0 THEN PROCborrow(R%,borrow%+1):PROCput(R%,borrow%,9)
+ENDPROC
+
+DEFPROCmul
+MA$=STRING$(256,"0"):MB$=STRING$(256,"0")
+P. CHR$(132);"MUL: Reg(0) = Reg(0) * Reg(1)"
+IF pos%(0)=pos%(1) THEN sign%=TRUE ELSE sign%=FALSE
+IF LEN(reg$(0)) > LEN(reg$(1)) THEN MA$=reg$(0):MB$=reg$(1)
+IF LEN(reg$(0)) <= LEN(reg$(1)) THEN MA$=reg$(1):MB$=reg$(0)
+PROCset(0,0):REM reset reg 0
+pos%(1)=TRUE
+FOR MI%=1 TO LEN(MA$)
+  reg$(1)=STRING$(MI%-1,"0"):REM leading zeroes
+  MC%=0
+  FOR MJ%=1 TO LEN(MB$)
+    M%=MC%+(VAL(MID$(MA$,MI%,1))*VAL(MID$(MB$,MJ%,1)))
+    MC%=M%/10
+    MP%=M% MOD 10
+    reg$(1)=reg$(1)+STR$(MP%)
+  NEXT
+  IF MC%>0 THEN reg$(1)=reg$(1)+STR$(MC%)
+  PROCadd
+NEXT
+pos%(0)=sign%
+ENDPROC
+
+REM quite a slow modulus calculation
+DEFPROCmod
+MD$=STRING$(256,"0")
+MD$=reg$(1)
+pos%(0)=TRUE
+REPEAT
+pos%(1)=TRUE:reg$(1)=MD$
+IF FNgt(0,1) THEN PROCsub
+UNTIL NOT FNgt(0,1) AND NOT FNeq(0,1)
+ENDPROC

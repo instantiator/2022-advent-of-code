@@ -4,7 +4,7 @@ DIM holding$(8), worry$(8), testDiv(8), onTrue(8), onFalse(8)
 DIM inspections(8)
 
 FOR I=0 TO 7
-  READ holding$(I), worry$(I), testDiv(I), onTrue(I), onFalse(I)
+READ holding$(I), worry$(I), testDiv(I), onTrue(I), onFalse(I)
 NEXT
 
 FOR r=1 TO 10000:PROCround(r):NEXT
@@ -30,7 +30,7 @@ PROCplot(I)
 
 REM get old value, apply worry rule, divide by 3
 old=VAL(item$)
-new=EVAL(worry$(I)) MOD 9699690
+new=EVAL(worry$(I))
 REM new=INT(new/3)
 IF new>=9699690 THEN new=new MOD 9699690
 REM REPEAT:new=new-9699690:UNTIL new<9699690
