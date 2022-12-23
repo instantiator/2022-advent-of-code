@@ -197,18 +197,30 @@ PROCsetStr(0,"4294967294")
 PROCsetStr(1,"429496722")
 PROCmod
 PROCassertStr("74",FNgetStr(0), "4294967294 MOD 429496722 = 74")
+
+P.
+PROCsetStr(0,"4294967294")
+PROCdiv(2)
+PROCassertStr("2147483647",FNgetStr(0), "4294967294 / 2 = 2147483647")
+PROCassertStr("",FNgetStr(1), "4294967294 MOD 2 = 0")
+
+P.
+PROCsetStr(0,"4294967294")
+PROCdiv(429496722)
+PROCassertStr("74",FNgetStr(1), "4294967294 MOD 429496722 = 74")
+
 ENDPROC
 
 DEFPROCassert(expected,value,msg$)
 IF value<>expected THEN P. CHR$(129);msg$:P. CHR$(131);"Expected: ";expected:P. CHR$(131);"Found:    ";value:END
-P. CHR$(130);"Assert:  ";msg$
+P. CHR$(130);msg$
 P. CHR$(130);"Result = ";value
 P. CHR$(130);"PASS"
 ENDPROC
 
 DEFPROCassertStr(expected$,value$,msg$)
 IF value$<>expected$ THEN P. CHR$(129);msg$:P. CHR$(131);"Expected: ";expected$:P. CHR$(131);"Found:    ";value$:END
-P. CHR$(130);"Assert:  ";msg$
+P. CHR$(130);msg$
 P. CHR$(130);"Result = ";value$
 P. CHR$(130);"PASS"
 ENDPROC
@@ -374,4 +386,27 @@ REPEAT
 pos%(1)=TRUE:reg$(1)=MD$
 IF FNgt(0,1) THEN PROCsub
 UNTIL NOT FNgt(0,1) AND NOT FNeq(0,1)
+ENDPROC
+
+REM division - divides r0 by mod%, puts the result in r0, the remainder in r2
+DEFPROCdiv(mod%)
+IF mod%<0 P."ERR - negative divisor":END
+result$=STRING$(256,"0"):result$=""
+remainder%=0
+FOR I%=LEN(reg$(0)) TO 1 STEP -1
+  REM pull down the next most significant digit into the remainder
+  remainder%=VAL(MID$(reg$(0),I%,1))+(remainder%*10)
+  REM divide the result by the mod
+  partial%=remainder%/mod%
+  REM pop the result into the next most significant place in the result
+  place%=partial%:REM MOD 10 probably not needed?
+  result$=STR$(place%)+result$
+  REM calc the remainder
+  remainder%=remainder%-(partial%*mod%)
+  REM until there are no more results
+NEXT
+REM pop result into r0
+reg$(0)=result$
+REM pop remainder into r1
+PROCset(1,remainder%)
 ENDPROC
