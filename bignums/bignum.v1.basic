@@ -208,7 +208,6 @@ P.
 PROCsetStr(0,"4294967294")
 PROCdiv(429496722)
 PROCassertStr("74",FNgetStr(1), "4294967294 MOD 429496722 = 74")
-
 ENDPROC
 
 DEFPROCassert(expected,value,msg$)
@@ -225,10 +224,13 @@ P. CHR$(130);"Result = ";value$
 P. CHR$(130);"PASS"
 ENDPROC
 
+REM bigint library >>>
+
 REM registers: 0=acc, 1=param, 2=scratch, 3=scratch2
 DEFPROCinit
 DIM reg$(3):FOR R%=0 TO 3:reg$(R%)=STRING$(256,"0"):NEXT
 DIM pos%(3):FOR R%=0 TO 3:pos%(R%)=TRUE:NEXT
+verbose%=TRUE
 ENDPROC
 
 DEFPROCset(R%,N%)
@@ -238,7 +240,7 @@ reg$(R%)=""
 FOR I%=LEN(reg$(2)) TO 1 STEP -1
 reg$(R%)=reg$(R%)+MID$(reg$(2),I%,1)
 NEXT
-P. CHR$(134);"Reg(";R%;") = ";FNget(R%)
+IF verbose% THEN P. CHR$(134);"Reg(";R%;") = ";FNget(R%)
 ENDPROC
 
 DEFPROCsetStr(R%,value$)
@@ -247,7 +249,7 @@ reg$(R%)=""
 FOR SI%=LEN(value$) TO 1 STEP -1
   reg$(R%)=reg$(R%)+MID$(value$,SI%,1)
 NEXT
-P. CHR$(134);"Reg(";R%;") = ";value$
+IF verbose% THEN P. CHR$(134);"Reg(";R%;") = ";value$
 ENDPROC
 
 REM register,digit,value
@@ -280,7 +282,7 @@ NEXT
 P.
 ENDPROC
 
-REM retrieves digitl D% from register R%
+REM retrieves digit D% from register R%
 REM remember: smallest digits come first
 DEFFNdig(R%,D%) =VAL(MID$(reg$(R%),D%,1))
 
@@ -308,7 +310,7 @@ NEXT
 
 REM adds registers 0 and 1, result goes into register 0
 DEFPROCadd
-P. CHR$(132);"ADD: Reg(0) = Reg(0) + Reg(1)"
+IF verbose% THEN P. CHR$(132);"ADD: Reg(0) = Reg(0) + Reg(1)"
 IF pos%(0) AND NOT pos%(1) THEN pos%(1)=TRUE:PROCsub:ENDPROC
 IF NOT pos%(0) AND pos%(1) THEN PROCswap:pos%(1)=TRUE:PROCsub:ENDPROC
 L%=LEN(reg$(0)):IF LEN(reg$(1))>L% THEN L%=LEN(reg$(1))
@@ -326,7 +328,7 @@ ENDPROC
 
 REM swap registers 0 and 1
 DEFPROCswap
-P. CHR$(132);"SWAP: Reg(0) <=> Reg(1)"
+IF verbose% THEN P. CHR$(132);"SWAP: Reg(0) <=> Reg(1)"
 reg$(2)=reg$(0):pos%(2)=pos%(0)
 reg$(0)=reg$(1):pos%(0)=pos%(1)
 reg$(1)=reg$(2):pos%(1)=pos%(2)
@@ -334,7 +336,7 @@ ENDPROC
 
 REM subtracts register 1 FROM register 0, result goes into register 0
 DEFPROCsub
-P. CHR$(132);"SUB: Reg(0) = Reg(0) - Reg(1)"
+IF verbose% THEN P. CHR$(132);"SUB: Reg(0) = Reg(0) - Reg(1)"
 IF NOT pos%(1) THEN pos%(1)=TRUE:PROCadd:ENDPROC
 IF FNgt(1,0) THEN PROCswap:PROCsub:pos%(0)=FALSE:ENDPROC
 L%=LEN(reg$(0)):IF LEN(reg$(1))>L% THEN L%=LEN(reg$(1))
@@ -356,7 +358,7 @@ ENDPROC
 
 DEFPROCmul
 MA$=STRING$(256,"0"):MB$=STRING$(256,"0")
-P. CHR$(132);"MUL: Reg(0) = Reg(0) * Reg(1)"
+IF verbose% THEN P. CHR$(132);"MUL: Reg(0) = Reg(0) * Reg(1)"
 IF pos%(0)=pos%(1) THEN sign%=TRUE ELSE sign%=FALSE
 IF LEN(reg$(0)) > LEN(reg$(1)) THEN MA$=reg$(0):MB$=reg$(1)
 IF LEN(reg$(0)) <= LEN(reg$(1)) THEN MA$=reg$(1):MB$=reg$(0)

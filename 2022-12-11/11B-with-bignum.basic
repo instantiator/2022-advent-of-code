@@ -1,0 +1,272 @@
+1 CLS
+2 ON ERROR PROCerror
+3 DIM holding$(8), worry$(8), testDiv(8), onTrue(8), onFalse(8)
+4 DIM inspections(8)
+5 START%=TIME
+6 PROCinit
+7 
+8 FOR I=0 TO 7
+9   READ holding$(I), worry$(I), testDiv(I), onTrue(I), onFalse(I)
+10 NEXT
+11 ry
+12 FOR r=1 TO 10000
+13 PROCround(r)
+14 IF r MOD 100 = 0 P. r
+15 NEXT
+16 P.''
+17 
+18 verbose%=TRUE
+19 FOR monkey=0 TO 7:P. "Monkey ";monkey;" made ";inspections(monkey);" inspections.":NEXT
+20 P. "Running time: ";TIME-START%
+21 END
+22 DEFPROCround(r)
+23 IF verbose% THEN P.TAB(0,0)"Round: ";r
+24 FOR I=0 TO 7
+25 REPEAT
+26 IF holding$(I)<>"" THEN PROCabuse(I)
+27 UNTIL holding$(I)=""
+28 NEXT
+29 ENDPROC
+30 
+31 DEFPROCabuse(I)
+32 inspections(I)=inspections(I)+1
+33 
+34 REM get and remove first item from monkey
+35 comma=INSTR(holding$(I),",")
+36 IF comma>0 THEN item$=LEFT$(holding$(I),comma-1) ELSE item$=holding$(I)
+37 IF comma>0 THEN holding$(I)=RIGHT$(holding$(I),LEN(holding$(I))-LEN(item$)-1) ELSE holding$(I)=""
+38 PROCplot(I)
+39 
+40 REM get old value, apply worry rule, divide by 3
+41 old$=item$:action$=worry$(I)
+42 PROCsetStr(0,old$)
+43 IF MID$(action$,7,3)="old" THEN PROCsetStr(1,old$) ELSE PROCsetStr(1,MID$(action$,7))
+44 IF MID$(action$,5,1)="-" THEN PROCsub
+45 IF MID$(action$,5,1)="+" THEN PROCadd
+46 IF MID$(action$,5,1)="*" THEN PROCmul
+47 PROCdiv(9699690):new$=FNgetStr(1)
+48 
+49 REM test division
+50 PROCsetStr(0,new$):REM put the new value (the remainder) into reg 0
+51 PROCdiv(testDiv(I))
+52 IF FNget(1)=0 THEN target=onTrue(I) ELSE target=onFalse(I)
+53 
+54 REM throw item to next monkey
+55 IF holding$(target)<>"" THEN holding$(target)=holding$(target)+","+new$
+56 IF holding$(target)="" THEN holding$(target)=holding$(target)+new$
+57 REM PROCplot(target)
+58 ENDPROC
+59 
+60 DEFPROCplot(monkey)
+61 IF verbose% THEN P.TAB(0,monkey+2);monkey;": ";inspections(monkey)
+62 ENDPROC
+63 
+64 DEFPROCerror
+65 CLS
+66 P. "Error at line: ";ERL
+67 REPORT
+68 REM P. '"Processing: ";old$
+69 REM P. "Last processed value: ";new$
+70 END
+71 
+72 REM  monkeys are 0-indexed
+73 REM  starting items,            new =         / by, T, F
+74 DATA "63,84,80,83,84,53,88,72", "old * 11",   13,   4, 7
+75 DATA "67,56,92,88,84",          "old + 4",    11,   5, 3
+76 DATA "52",                      "old * old",  2,    3, 1
+77 DATA "59,53,60,92,69,72",       "old + 2",    5,    5, 6
+78 DATA "61,52,55,61",             "old + 3",    7,    7, 2
+79 DATA "79,53",                   "old + 1",    3,    0, 6
+80 DATA "59,86,67,95,92,77,91",    "old + 5",    19,   4, 0
+81 DATA "58,83,89",                "old * 19",   17,   2, 1
+82 
+83 
+84 
+85 REM bigint library >>>
+86 
+87 REM registers: 0=acc, 1=param, 2=scratch, 3=scratch2
+88 DEFPROCinit
+89 DIM reg$(3):FOR R%=0 TO 3:reg$(R%)=STRING$(256,"0"):NEXT
+90 DIM pos%(3):FOR R%=0 TO 3:pos%(R%)=TRUE:NEXT
+91 verbose%=FALSE
+92 ENDPROC
+93 
+94 DEFPROCset(R%,N%)
+95 pos%(R%)=N%>=0:N%=ABS(N%)
+96 reg$(2)=STR$(N%)
+97 reg$(R%)=""
+98 FOR I%=LEN(reg$(2)) TO 1 STEP -1
+99 reg$(R%)=reg$(R%)+MID$(reg$(2),I%,1)
+100 NEXT
+101 IF verbose% THEN P. CHR$(134);"Reg(";R%;") = ";FNget(R%)
+102 ENDPROC
+103 
+104 DEFPROCsetStr(R%,value$)
+105 IF LEFT$(value$,1)="-" THEN pos%(R%)=FALSE:value$=RIGHT$(value$,LEN(value$)-1) ELSE pos%(R%)=TRUE
+106 reg$(R%)=""
+107 FOR SI%=LEN(value$) TO 1 STEP -1
+108   reg$(R%)=reg$(R%)+MID$(value$,SI%,1)
+109 NEXT
+110 IF verbose% THEN P. CHR$(134);"Reg(";R%;") = ";value$
+111 ENDPROC
+112 
+113 REM register,digit,value
+114 DEFPROCput(R%,U%,V%)
+115 reg$(R%)=LEFT$(reg$(R%),U%-1) + STR$(V%) + RIGHT$(reg$(R%), LEN(reg$(R%))-U%)
+116 ENDPROC
+117 
+118 DEFFNget(R%)
+119 N% = 0
+120 FOR I%=1 TO LEN(reg$(R%))
+121 N% = N% + (FNdig(R%,I%) * (10^(I%-1)))
+122 NEXT
+123 IF pos%(R%) THEN =N% ELSE =-N%
+124 
+125 DEFFNgetStr(R%)
+126 IF NOT pos%(R%) THEN reg$(2)="-" ELSE reg$(2)=""
+127 leading%=TRUE
+128 FOR I%=LEN(reg$(R%)) TO 1 STEP -1
+129   C$=MID$(reg$(R%),I%,1)
+130   IF C$<>"0" THEN leading%=FALSE
+131   IF NOT leading% THEN reg$(2)=reg$(2)+C$
+132 NEXT
+133 =reg$(2)
+134 
+135 DEFPROCprint(R%)
+136 IF NOT pos%(R%) THEN P."-";
+137 FOR PR%=1 TO LEN(reg$(R%))
+138   P. MID$(reg$(R%),PR%,1);
+139 NEXT
+140 P.
+141 ENDPROC
+142 
+143 REM retrieves digit D% from register R%
+144 REM remember: smallest digits come first
+145 DEFFNdig(R%,D%) =VAL(MID$(reg$(R%),D%,1))
+146 
+147 REM true if the contents of both registers are equal
+148 DEFFNeq(A%,B%)
+149 result=TRUE
+150 IF LEN(reg$(A%)) <> LEN(reg$(B%)) =FALSE
+151 FOR I%=LEN(reg$(A%)) TO 1 STEP -1
+152 IF FNdig(A%,I%) <> FNdig(B%,I%) result=FALSE:I%=0
+153 NEXT
+154 =result
+155 
+156 REM true if the contents of register A% > contents of register B%
+157 DEFFNgt(A%,B%)
+158 IF pos%(A%) AND NOT pos%(B%) THEN =TRUE
+159 IF pos%(B%) AND NOT pos%(A%) THEN =FALSE
+160 larger=FALSE
+161 L%=LEN(reg$(A%)):IF LEN(reg$(B%))>L% THEN L%=LEN(reg$(B%))
+162 FOR GTI%=L% TO 1 STEP -1
+163 CA%=FNdig(A%,GTI%):CB%=FNdig(B%,GTI%)
+164 IF CA% > CB% THEN larger=pos%(A%):GTI%=0
+165 IF CA% < CB% THEN larger=NOT pos%(A%):GTI%=0
+166 NEXT
+167 =larger
+168 
+169 REM adds registers 0 and 1, result goes into register 0
+170 DEFPROCadd
+171 IF verbose% THEN P. CHR$(132);"ADD: Reg(0) = Reg(0) + Reg(1)"
+172 IF pos%(0) AND NOT pos%(1) THEN pos%(1)=TRUE:PROCsub:ENDPROC
+173 IF NOT pos%(0) AND pos%(1) THEN PROCswap:pos%(1)=TRUE:PROCsub:ENDPROC
+174 L%=LEN(reg$(0)):IF LEN(reg$(1))>L% THEN L%=LEN(reg$(1))
+175 C%=0:reg$(2)=""
+176 FOR I%=1 TO L%
+177 S%=FNdig(0,I%) + FNdig(1,I%) + C%:REM sum
+178 P%=S% MOD 10:REM place
+179 C%=S% / 10:REM carry
+180 reg$(2)=reg$(2)+STR$(P%)
+181 NEXT
+182 IF C%>0 reg$(2)=reg$(2)+STR$(C%)
+183 reg$(0)=reg$(2)
+184 IF NOT pos%(0) AND NOT pos%(2) THEN pos%(0)=FALSE
+185 ENDPROC
+186 
+187 REM swap registers 0 and 1
+188 DEFPROCswap
+189 IF verbose% THEN P. CHR$(132);"SWAP: Reg(0) <=> Reg(1)"
+190 reg$(2)=reg$(0):pos%(2)=pos%(0)
+191 reg$(0)=reg$(1):pos%(0)=pos%(1)
+192 reg$(1)=reg$(2):pos%(1)=pos%(2)
+193 ENDPROC
+194 
+195 REM subtracts register 1 FROM register 0, result goes into register 0
+196 DEFPROCsub
+197 IF verbose% THEN P. CHR$(132);"SUB: Reg(0) = Reg(0) - Reg(1)"
+198 IF NOT pos%(1) THEN pos%(1)=TRUE:PROCadd:ENDPROC
+199 IF FNgt(1,0) THEN PROCswap:PROCsub:pos%(0)=FALSE:ENDPROC
+200 L%=LEN(reg$(0)):IF LEN(reg$(1))>L% THEN L%=LEN(reg$(1))
+201 reg$(2)=""
+202 FOR I%=1 TO L%
+203 S%=FNdig(0,I%) - FNdig(1,I%)
+204 IF S%<0 THEN PROCborrow(0,I%+1):S%=S%+10
+205 reg$(2)=reg$(2)+STR$(S%)
+206 NEXT
+207 reg$(0)=reg$(2)
+208 ENDPROC
+209 
+210 REM borrows from the next (recursive) digit in register 0
+211 DEFPROCborrow(R%,borrow%)
+212 digit%=FNdig(R%,borrow%)
+213 IF digit%>0 PROCput(R%,borrow%,digit%-1)
+214 IF digit%=0 THEN PROCborrow(R%,borrow%+1):PROCput(R%,borrow%,9)
+215 ENDPROC
+216 
+217 DEFPROCmul
+218 MA$=STRING$(256,"0"):MB$=STRING$(256,"0")
+219 IF verbose% THEN P. CHR$(132);"MUL: Reg(0) = Reg(0) * Reg(1)"
+220 IF pos%(0)=pos%(1) THEN sign%=TRUE ELSE sign%=FALSE
+221 IF LEN(reg$(0)) > LEN(reg$(1)) THEN MA$=reg$(0):MB$=reg$(1)
+222 IF LEN(reg$(0)) <= LEN(reg$(1)) THEN MA$=reg$(1):MB$=reg$(0)
+223 PROCset(0,0):REM reset reg 0
+224 pos%(1)=TRUE
+225 FOR MI%=1 TO LEN(MA$)
+226   reg$(1)=STRING$(MI%-1,"0"):REM leading zeroes
+227   MC%=0
+228   FOR MJ%=1 TO LEN(MB$)
+229     M%=MC%+(VAL(MID$(MA$,MI%,1))*VAL(MID$(MB$,MJ%,1)))
+230     MC%=M%/10
+231     MP%=M% MOD 10
+232     reg$(1)=reg$(1)+STR$(MP%)
+233   NEXT
+234   IF MC%>0 THEN reg$(1)=reg$(1)+STR$(MC%)
+235   PROCadd
+236 NEXT
+237 pos%(0)=sign%
+238 ENDPROC
+239 
+240 REM quite a slow modulus calculation
+241 DEFPROCmod
+242 MD$=STRING$(256,"0")
+243 MD$=reg$(1)
+244 pos%(0)=TRUE
+245 REPEAT
+246 pos%(1)=TRUE:reg$(1)=MD$
+247 IF FNgt(0,1) THEN PROCsub
+248 UNTIL NOT FNgt(0,1) AND NOT FNeq(0,1)
+249 ENDPROC
+250 
+251 REM division - divides r0 by mod%, puts the result in r0, the remainder in r2
+252 DEFPROCdiv(mod%)
+253 IF mod%<0 P."ERR - negative divisor":END
+254 result$=STRING$(256,"0"):result$=""
+255 remainder%=0
+256 FOR I%=LEN(reg$(0)) TO 1 STEP -1
+257   REM pull down the next most significant digit into the remainder
+258   remainder%=VAL(MID$(reg$(0),I%,1))+(remainder%*10)
+259   REM divide the result by the mod
+260   partial%=remainder%/mod%
+261   REM pop the result into the next most significant place in the result
+262   place%=partial%:REM MOD 10 probably not needed?
+263   result$=STR$(place%)+result$
+264   REM calc the remainder
+265   remainder%=remainder%-(partial%*mod%)
+266   REM until there are no more results
+267 NEXT
+268 REM pop result into r0
+269 reg$(0)=result$
+270 REM pop remainder into r1
+271 PROCset(1,remainder%)
+272 ENDPROC

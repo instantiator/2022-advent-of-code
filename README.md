@@ -20,7 +20,13 @@ For now, you can copy/paste the code for each solution into the Owlet editor, an
 | ![Result 08A](2022-12-08/08A-screenshot.png "BBC Micro graphics - the forest is rendered in a grid, and each visible tree is a bright white pixel. It creates a dotted effect, with a mark darker centre to the woods.")<br/>[08A-solution.basic](2022-12-08/08A-solution.basic) | ![Result 08B](2022-12-08/08B-screenshot.png "BBC Micro graphics - all green this time. A pixel for every tree in the forest, and some stats at the top showing that each tree has been examined.")<br/>[08B-solution.basic](2022-12-08/08B-solution.basic) |
 | ![Result 09A](2022-12-09/09A-screenshot.png "BBC Micro graphics - the motion of the rope's tail is rendered in yellow. At the top of the screen, the outcome is printed: 5960")<br/>[09A-solution.basic](2022-12-09/09A-solution.basic) | ![Result 09B](2022-12-09/09B-screenshot.png "BBC Micro graphics - BBC Micro graphics - the motion of the rope's tail is rendered in yellow. Its form is much smoother than the first solution, and mostly diagonal. At the top of the screen, the outcome is printed: 2327")<br/>[09B-solution.basic](2022-12-09/09B-solution.basic)<br/>(runtime: ~90m) |
 | ![Result 10A](2022-12-10/10A-screenshot.png "BBC Micro screen - coloured text on black - showing half a dozen numbers in cyan, and their sum in green: 15020")<br/>[10A-solution.basic](2022-12-10/10A-solution.basic) | ![Result 10B](2022-12-10/10B-screenshot.png "BBC Micro graphics - a small 40x6 dot display in the centre of the screen shows the letters: EFUGLPAP")<br/>[10B-solution.basic](2022-12-10/10B-solution.basic) |
-| ![Result 11A](2022-12-11/11A-screenshot.png "BBC Micro screen - a few rows of comma separated numbers at the top, and then below there are 8 items listed stating how many inspections each monkey made.")<br/>[11A-solution.basic](2022-12-11/11A-solution.basic) | Incomplete - numbers too big for BASIC to handle. |
+| ![Result 11A](2022-12-11/11A-screenshot.png "BBC Micro screen - a few rows of comma separated numbers at the top, and then below there are 8 items listed stating how many inspections each monkey made.")<br/>[11A-solution.basic](2022-12-11/11A-solution.basic) | ![Result 11B](2022-12-11/11B-screenshot.png "A terminal shows a BBC Micro prompt with RUN. Below is a row of dots. Below that are 8 entries - one for each money, indicating how many inspections each monkey made.")<br/>[11B-solution.basic](2022-12-11/11B-with-bignum.basic)<br/>[bignum.v1.basic](bignums/bignum.v1.basic) |
+
+## Beebjit
+
+Beebjit is a super fast BBC Micro emulator. I've used it to crunch solutions for problems that would have taken an inordinate amount of time. So far, that's:
+
+* **11B** - This required 10,000 iterations of a complex algorithm that makes use of the `bignum` library functions (which, in turn, are very slow).
 
 ## The Beeb
 
